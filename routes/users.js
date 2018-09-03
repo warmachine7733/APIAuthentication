@@ -17,6 +17,11 @@ router
     userController.signin
   );
 
+//
+router
+  .route("/oauth/google")
+  .post(passport.authenticate("googleToken", { session:false }),userController.googleOAuth);
+
 router
   .route("/secret")
   .get(passport.authenticate("jwt", { session: false }), userController.secret);
