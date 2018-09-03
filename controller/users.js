@@ -17,7 +17,6 @@ signToken = user => {
 
 module.exports = {
   signup: async (req, res, next) => {
-    
     const { email, password } = req.value.body;
 
     //checking user with same email id already exists
@@ -28,17 +27,19 @@ module.exports = {
     const newUser = new User({ email, password });
     await newUser.save();
 
-    //send token
+    //create and send token
     const token = signToken(newUser);
 
     res.status(200).json({ token });
   },
 
   signin: async (req, res, next) => {
-    console.log("userController.signin() is called");
+    //gen Token
+   const token = await signToken(req.user);
+   res.status(200).json({token})
   },
 
   secret: async (req, res, next) => {
-    console.log("userController.secret() is called");
+    res.status(200).json({ resource: "success" });
   }
 };
