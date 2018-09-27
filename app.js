@@ -27,5 +27,5 @@ app.use("/users", require("./routes/users"));
 
 //starting server
 
-const port = process.env.port || 7000 ;
+const port = process.env.PORT || 7000 ;
 app.listen(port, () => console.log(`server is on at ${port}`));
