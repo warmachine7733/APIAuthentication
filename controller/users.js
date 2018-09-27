@@ -16,6 +16,14 @@ signToken = user => {
 };
 
 module.exports = {
+  allUsers: async (req, res, next) => {
+    try {
+      const allUsers = await User.find({});
+      res.status(200).json({ allUsers });
+    } catch (err) {
+      res.status(404).json("no users");
+    }
+  },
   signup: async (req, res, next) => {
     const { email, password } = req.value.body;
 

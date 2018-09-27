@@ -5,6 +5,9 @@ const passportConf = require("../passport");
 const { validateBody, schemas } = require("../helpers/routesHelper");
 const userController = require("../controller/users");
 
+//getting all users
+router.route("/").get(userController.allUsers);
+
 router
   .route("/signup")
   .post(validateBody(schemas.authSchema), userController.signup);
@@ -20,7 +23,10 @@ router
 //
 router
   .route("/oauth/google")
-  .post(passport.authenticate("googleToken", { session:false }),userController.googleOAuth);
+  .post(
+    passport.authenticate("googleToken", { session: false }),
+    userController.googleOAuth
+  );
 
 router
   .route("/secret")
